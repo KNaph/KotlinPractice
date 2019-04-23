@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/fragmentImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/num1ET"
+            android:layout_width="750px"
+            android:layout_height="wrap_content"
+            android:hint="First Number"
+            android:inputType="number"
+            />
+        <EditText
+            android:id="@+id/num2ET"
+            android:layout_width="750px"
+            android:layout_height="wrap_content"
+            android:hint="Second Number"
+            android:inputType="number"
+            />
+        <TextView
+            android:id="@+id/resultTV"
+            android:layout_width="750px"
+            android:layout_height="wrap_content"
+            android:text="Result:"/>
+        <Button
+            android:id="@+id/calcBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculate"/>
+
+
+    </LinearLayout>
+</ScrollView>
