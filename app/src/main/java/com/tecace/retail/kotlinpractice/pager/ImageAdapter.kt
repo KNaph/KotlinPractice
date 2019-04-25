@@ -64,7 +64,7 @@ class ImageAdapter : BaseAdapter {
             bundle.putInt("primaryImage", position)
 
             val imageFragment = KotlinFragment()
-            imageFragment.arguments = bundle
+            imageFragment.arguments = bundle // TODO: Sending null position?
             activity.supportFragmentManager.beginTransaction().replace(R.id.content_frame, imageFragment, "ImageFragment: $position")
                 .addToBackStack(null)
                 .commit()

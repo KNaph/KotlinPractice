@@ -27,7 +27,7 @@ class KotlinFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState != null) {
-            primaryImage = savedInstanceState.getInt("primaryImage")
+            primaryImage = savedInstanceState.getInt("primaryImage") // TODO: NULL???
         }
     }
 
