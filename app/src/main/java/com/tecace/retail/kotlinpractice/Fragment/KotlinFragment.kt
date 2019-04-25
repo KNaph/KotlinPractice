@@ -22,13 +22,18 @@ class KotlinFragment : Fragment() {
     private lateinit var imageCollectionPagerAdapter: ImageCollectionPagerAdapter
     private lateinit var viewPager: CustomViewPager
     private var primaryImage: Int = 0
+    private lateinit var files: Array<File>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState != null) {
             primaryImage = savedInstanceState.getInt("primaryImage") // TODO: NULL???
+        } else {
+            Log.d(TAG, "KP## SAVED INSTANCE STATE NULL?")
         }
+
+        initFiles()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,26 +48,14 @@ class KotlinFragment : Fragment() {
             onClick()
         }
 
-//        val rawImage = this.context.assets.
-
-        val completePath = this.context?.getExternalFilesDir("images")
-
-        val dir = File(completePath.toString())
-        val files = dir.listFiles()
-
-        for (file in files)
-            Log.d(TAG, "KP## ${file.name}")
-
-//        val image = File(completePath.toString() + "/IMG_20180520_103356.dng")
-        val image = File(completePath.toString() + "/IMG_8924.CR2")
-        Log.d(TAG, "PATH : $completePath : $image")
-        val pHolder = 0.25f
-//        Glide.with(this).load(image).thumbnail(pHolder).into(fragmentImage)
-
-        imageCollectionPagerAdapter = ImageCollectionPagerAdapter(childFragmentManager, files)
-        imageCollectionPagerAdapter.setPrimaryItem(view, primaryImage, Any())
         viewPager = view.findViewById(R.id.fragment_pager)
+        imageCollectionPagerAdapter = ImageCollectionPagerAdapter(childFragmentManager, files)
         viewPager.adapter = imageCollectionPagerAdapter
+//        imageCollectionPagerAdapter.setPrimaryItem(viewPager, primaryImage, imageCollectionPagerAdapter.instantiateItem(viewPager, primaryImage))
+
+        Log.d(TAG, "KP## CURRENT ITEM VAL : $primaryImage")
+        viewPager.currentItem = primaryImage
+//        imageCollectionPagerAdapter.instantiateItem(viewPager, primaryImage)
     }
 
     private fun onClick() {
@@ -73,8 +66,15 @@ class KotlinFragment : Fragment() {
         resultTV.text = "Result: " + result.toString()
     }
 
+    private fun initFiles() {
 
+        val completePath = this.context?.getExternalFilesDir("images")
+
+        val dir = File(completePath.toString())
+        files = dir.listFiles()
+    }
 }
+
 
 class ImageCollectionPagerAdapter(fm: FragmentManager, fileArray: Array<File>) : FragmentStatePagerAdapter(fm) {
 
@@ -91,6 +91,12 @@ class ImageCollectionPagerAdapter(fm: FragmentManager, fileArray: Array<File>) :
 
     override fun getCount(): Int {
         return files.size
+    }
+
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        Log.d("INSTANTIATE ITEM", "KP## INSTANTIATE ITEM CALLED : $position")
+
+        return super.instantiateItem(container, position)
     }
 }
 

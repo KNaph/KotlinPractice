@@ -17,12 +17,14 @@ class ImageGrid : Fragment() {
 
     private lateinit var imageGrid: GridView
     private lateinit var fileList: ArrayList<File>
+    private lateinit var files: Array<File>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         this.fileList = ArrayList()
-
+        initFiles()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -35,17 +37,19 @@ class ImageGrid : Fragment() {
 
         this.imageGrid = view.findViewById(R.id.image_gridview)
 
-//        this.imageGrid.columnWidth =
+        this.imageGrid.adapter = this.context?.let { activity?.let { it1 -> ImageAdapter(it, this.fileList, it1) } }
+    }
+
+    private fun initFiles() {
+
         val completePath = this.context?.getExternalFilesDir("images")
 
         val dir = File(completePath.toString())
-        val files = dir.listFiles()
+        files = dir.listFiles()
 
         for (file in files) {
             Log.d(TAG, "KP## ${file.name}")
             fileList.add(file)
         }
-
-        this.imageGrid.adapter = this.context?.let { activity?.let { it1 -> ImageAdapter(it, this.fileList, it1) } }
     }
 }
