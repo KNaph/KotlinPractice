@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.tecace.retail.kotlinpractice.R
 import com.tecace.retail.kotlinpractice.pager.CustomViewPager
-import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_image_collection.*
 import java.io.File
 
@@ -27,43 +25,24 @@ class KotlinFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState != null) {
-            primaryImage = savedInstanceState.getInt("primaryImage") // TODO: NULL???
-        } else {
-            Log.d(TAG, "KP## SAVED INSTANCE STATE NULL?")
+        if (arguments != null) {
+            primaryImage = arguments!!.getInt("primaryImage") // TODO: NULL???
         }
-
         initFiles()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 //        return super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_calculator, container, false)
+        return inflater.inflate(R.layout.fragment_image_focus, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        calcBtn.setOnClickListener {
-            onClick()
-        }
-
         viewPager = view.findViewById(R.id.fragment_pager)
         imageCollectionPagerAdapter = ImageCollectionPagerAdapter(childFragmentManager, files)
         viewPager.adapter = imageCollectionPagerAdapter
-//        imageCollectionPagerAdapter.setPrimaryItem(viewPager, primaryImage, imageCollectionPagerAdapter.instantiateItem(viewPager, primaryImage))
-
-        Log.d(TAG, "KP## CURRENT ITEM VAL : $primaryImage")
         viewPager.currentItem = primaryImage
-//        imageCollectionPagerAdapter.instantiateItem(viewPager, primaryImage)
-    }
-
-    private fun onClick() {
-        val num1 = num1ET.text.toString()
-        val num2 = num2ET.text.toString()
-        val result = num1.toFloat() + num2.toFloat()
-
-        resultTV.text = "Result: " + result.toString()
     }
 
     private fun initFiles() {
@@ -91,12 +70,6 @@ class ImageCollectionPagerAdapter(fm: FragmentManager, fileArray: Array<File>) :
 
     override fun getCount(): Int {
         return files.size
-    }
-
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        Log.d("INSTANTIATE ITEM", "KP## INSTANTIATE ITEM CALLED : $position")
-
-        return super.instantiateItem(container, position)
     }
 }
 

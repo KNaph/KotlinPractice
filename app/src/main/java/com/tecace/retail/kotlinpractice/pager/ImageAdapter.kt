@@ -7,6 +7,7 @@ import android.graphics.Point
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -22,6 +23,9 @@ import com.tecace.retail.kotlinpractice.view.CustomGridViewItem
 import java.io.File
 
 class ImageAdapter : BaseAdapter {
+
+    val TAG = this.javaClass.simpleName
+
 
     private var context: Context
     private var fileList: ArrayList<File>
@@ -65,6 +69,7 @@ class ImageAdapter : BaseAdapter {
 
             val imageFragment = KotlinFragment()
             imageFragment.arguments = bundle // TODO: Sending null position?
+
             activity.supportFragmentManager.beginTransaction().replace(R.id.content_frame, imageFragment, "ImageFragment: $position")
                 .addToBackStack(null)
                 .commit()

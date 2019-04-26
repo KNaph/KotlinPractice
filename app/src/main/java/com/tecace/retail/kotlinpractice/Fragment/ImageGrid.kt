@@ -48,7 +48,7 @@ class ImageGrid : Fragment() {
         files = dir.listFiles()
 
         for (file in files) {
-            Log.d(TAG, "KP## ${file.name}")
+//            Log.d(TAG, "KP## ${file.name}")
             fileList.add(file)
         }
     }

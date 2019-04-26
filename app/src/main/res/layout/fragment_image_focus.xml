@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:fillViewport="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.tecace.retail.kotlinpractice.pager.CustomViewPager
+        android:id="@+id/fragment_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent">
+
+    </com.tecace.retail.kotlinpractice.pager.CustomViewPager>
+</FrameLayout>
