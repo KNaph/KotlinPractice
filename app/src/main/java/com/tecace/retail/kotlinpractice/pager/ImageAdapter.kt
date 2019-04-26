@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Point
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentTransitionImpl
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
@@ -70,7 +71,15 @@ class ImageAdapter : BaseAdapter {
             val imageFragment = KotlinFragment()
             imageFragment.arguments = bundle // TODO: Sending null position?
 
+          /*
+          * Referring to
+          * https://developer.android.com/training/animation/zoom - Tap to zoom
+          * Pinch zoom functionality
+          * */
+
+
             activity.supportFragmentManager.beginTransaction().replace(R.id.content_frame, imageFragment, "ImageFragment: $position")
+//                .setTransition()
                 .addToBackStack(null)
                 .commit()
 
