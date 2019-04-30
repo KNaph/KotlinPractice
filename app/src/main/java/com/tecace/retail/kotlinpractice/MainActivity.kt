@@ -13,11 +13,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var transaction = supportFragmentManager.beginTransaction()
 
-        val kotlinFragment = KotlinFragment()
+//        val kotlinFragment = KotlinFragment()
         val imageGrid = ImageGrid()
 
 //        transaction.replace(R.id.content_frame, kotlinFragment).commit()
         transaction.replace(R.id.content_frame, imageGrid).commit()
 
     }
+
+
 }

@@ -61,9 +61,11 @@ class ImageAdapter : BaseAdapter {
             .load(this.fileList[position])
             .apply(requestOps)
             .thumbnail(0.25f)
+            .dontAnimate()
             .into(imageView)
 
-        imageView.setOnClickListener { Toast.makeText(this.context, "CLICKED: $position", Toast.LENGTH_LONG).show()
+        imageView.setOnClickListener {
+//            Toast.makeText(this.context, "CLICKED: $position", Toast.LENGTH_LONG).show()
 
             val bundle = Bundle()
             bundle.putInt("primaryImage", position)

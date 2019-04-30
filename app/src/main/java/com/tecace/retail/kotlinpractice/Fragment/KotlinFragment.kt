@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v4.view.GestureDetectorCompat
+import android.util.Log
+import android.view.*
+import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.tecace.retail.kotlinpractice.GestureListener
 import com.tecace.retail.kotlinpractice.R
 import com.tecace.retail.kotlinpractice.pager.CustomViewPager
 import kotlinx.android.synthetic.main.fragment_image_collection.*
@@ -77,6 +79,13 @@ private const val ARG_IMAGE = "image"
 
 class ImageObjectFragment : Fragment() {
 
+    val TAG = this.javaClass.simpleName
+
+
+    private lateinit var scaleDetector: ScaleGestureDetector
+    private var scaleFactor = 1.0f
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_image_collection, container, false)
     }
@@ -85,7 +94,73 @@ class ImageObjectFragment : Fragment() {
 //        super.onViewCreated(view, savedInstanceState)
         arguments?.takeIf { it.containsKey(ARG_IMAGE) }?.apply {
             val image = File(getString(ARG_IMAGE))
-            context?.let { Glide.with(it).load(image).into(pager_image_box) }
+            if (image.extension == "gif") {
+                context?.let { Glide.with(it).asGif().load(image).into(pager_image_box) }
+            } else {
+                context?.let { Glide.with(it).load(image).into(pager_image_box) }
+            }
         }
+
+        val customGestureListener = GestureListener()
+
+        val gesture = GestureDetector(activity, customGestureListener)
+
+        // Listener doesn't do anything?
+        gesture.setOnDoubleTapListener(object : GestureDetector.OnDoubleTapListener {
+            override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                return true
+            }
+
+            override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                return true
+            }
+
+            override fun onDoubleTap(e: MotionEvent?): Boolean {
+                Log.d(TAG, "KP## DOUBLE TAP EVENT?")
+                return true
+            }
+        })
+
+        pager_image_box.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+//                when (event?.action) {
+//                    MotionEvent.ACTION_DOWN -> Toast.makeText(context, "TOUCHED IMAGE...? ", Toast.LENGTH_LONG).show()
+//                }
+//
+//                return v?.onTouchEvent(event) ?: true
+
+                return gesture.onTouchEvent(event)
+
+//                return when (event?.action) {
+//                    MotionEvent.ACTION_DOWN -> {
+//                        Log.d(TAG, "Action was DOWN")
+//                        pager_image_box.scaleX = pager_image_box.scaleX*2
+//                        pager_image_box.scaleY = pager_image_box.scaleY*2
+//                        true
+//                    }
+//                    MotionEvent.ACTION_MOVE -> {
+//                        Log.d(TAG, "Action was MOVE")
+//                        true
+//                    }
+//                    MotionEvent.ACTION_UP -> {
+//                        Log.d(TAG, "Action was UP")
+//                        pager_image_box.scaleX = pager_image_box.scaleX/2
+//                        pager_image_box.scaleY = pager_image_box.scaleY/2
+//                        true
+//                    }
+//                    MotionEvent.ACTION_CANCEL -> {
+//                        Log.d(TAG, "Action was CANCEL")
+//                        true
+//                    }
+//                    MotionEvent.ACTION_OUTSIDE -> {
+//                        Log.d(TAG, "Movement occurred outside bounds of current screen element")
+//                        true
+//                    }
+//                    else -> false
+//                }
+            }
+        })
     }
 }
