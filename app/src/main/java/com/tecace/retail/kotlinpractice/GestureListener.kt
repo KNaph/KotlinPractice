@@ -9,6 +9,11 @@ class GestureListener : GestureDetector.SimpleOnGestureListener() {
 
     val TAG = this.javaClass.simpleName
 
+    override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
+        Log.d(TAG, "KP## Action onFling")
+        return super.onFling(e1, e2, velocityX, velocityY)
+    }
+
     override fun onLongPress(e: MotionEvent?) {
         Log.d(TAG, "KP## Action onLongPress")
 
@@ -16,9 +21,7 @@ class GestureListener : GestureDetector.SimpleOnGestureListener() {
     }
 
     override fun onDown(e: MotionEvent?): Boolean {
-        Log.d(TAG, "KP## Action onDown")
-
-        return super.onDown(e)
+        return true
     }
 
     override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
@@ -29,12 +32,12 @@ class GestureListener : GestureDetector.SimpleOnGestureListener() {
 
     override fun onSingleTapUp(e: MotionEvent?): Boolean {
         Log.d(TAG, "KP## Action onSingleTapUp")
-        return super.onSingleTapUp(e)
+        return true
     }
 
     override fun onDoubleTap(e: MotionEvent?): Boolean {
         Log.d(TAG, "KP## Action onDoubleTap")
 
-        return true
+        return super.onDoubleTap(e)
     }
 }

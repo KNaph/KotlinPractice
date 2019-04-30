@@ -105,61 +105,10 @@ class ImageObjectFragment : Fragment() {
 
         val gesture = GestureDetector(activity, customGestureListener)
 
-        // Listener doesn't do anything?
-        gesture.setOnDoubleTapListener(object : GestureDetector.OnDoubleTapListener {
-            override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                return true
-            }
-
-            override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                return true
-            }
-
-            override fun onDoubleTap(e: MotionEvent?): Boolean {
-                Log.d(TAG, "KP## DOUBLE TAP EVENT?")
-                return true
-            }
-        })
-
         pager_image_box.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-//                when (event?.action) {
-//                    MotionEvent.ACTION_DOWN -> Toast.makeText(context, "TOUCHED IMAGE...? ", Toast.LENGTH_LONG).show()
-//                }
-//
-//                return v?.onTouchEvent(event) ?: true
 
                 return gesture.onTouchEvent(event)
-
-//                return when (event?.action) {
-//                    MotionEvent.ACTION_DOWN -> {
-//                        Log.d(TAG, "Action was DOWN")
-//                        pager_image_box.scaleX = pager_image_box.scaleX*2
-//                        pager_image_box.scaleY = pager_image_box.scaleY*2
-//                        true
-//                    }
-//                    MotionEvent.ACTION_MOVE -> {
-//                        Log.d(TAG, "Action was MOVE")
-//                        true
-//                    }
-//                    MotionEvent.ACTION_UP -> {
-//                        Log.d(TAG, "Action was UP")
-//                        pager_image_box.scaleX = pager_image_box.scaleX/2
-//                        pager_image_box.scaleY = pager_image_box.scaleY/2
-//                        true
-//                    }
-//                    MotionEvent.ACTION_CANCEL -> {
-//                        Log.d(TAG, "Action was CANCEL")
-//                        true
-//                    }
-//                    MotionEvent.ACTION_OUTSIDE -> {
-//                        Log.d(TAG, "Movement occurred outside bounds of current screen element")
-//                        true
-//                    }
-//                    else -> false
-//                }
             }
         })
     }
